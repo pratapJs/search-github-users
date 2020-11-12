@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import{MdErrorOutline, MdSearch, mdSearch} from 'react-icons/md'
+import{ MdSearch} from 'react-icons/md'
 import {GithubContext} from "../context/context"
 import {setColor,setTransition} from "../styles"
 

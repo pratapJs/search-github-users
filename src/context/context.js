@@ -26,14 +26,14 @@ const GithubContext = React.createContext();
         const response = await axios(`${rootUrl}/users/${user}`).catch((error)=>{
         console.log(error)
         })
-      console.log(response)
+    
         if(response){
             setGithubUser(response.data);
             const{login, followers_url} = response.data;
           
 
            await Promise.allSettled([axios(`${rootUrl}/users/${login}/repos?per_page=100`),
-           axios(`${followers_url}?per_page=100`) ]).then((results)=>{
+           axios(`${followers_url}?per_page=100`), ]).then((results)=>{
                const[repos,followers]=results;
                const status='fulfilled';
                if(repos.status===status){
@@ -68,7 +68,11 @@ if(remaining===0){
         setError({show,msg})
     }
 
-   useEffect(checkRequests,[])
+   useEffect(checkRequests,[]);
+   //get initial user
+   useEffect(()=>{
+       searchGithubUser('pratapjs')
+   },[]);
     
     return(
     <GithubContext.Provider value={{githubUser,repos,followers, requests,error, searchGithubUser, isLoading}}>{children}</GithubContext.Provider>
